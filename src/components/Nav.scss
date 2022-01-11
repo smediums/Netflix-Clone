@@ -1,0 +1,238 @@
+@mixin absolute {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nav {
+  position: fixed;
+  width: 100%;
+  height: 6vh;
+  padding: 0.3rem 4%;
+  top: 0;
+  z-index: 8;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.616),
+    rgba(17, 17, 17, 0.466),
+    transparent
+  );
+  transition: all 0.3s ease-in-out;
+
+  &.blkNav {
+    background: linear-gradient(180deg, #000, #111);
+  }
+
+  .logo {
+    @include absolute;
+    width: 8%;
+    max-width: 93px;
+  }
+
+  .browse {
+    position: absolute;
+    left: 15%;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #eee;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease-in-out;
+
+    &.drop {
+      .browseIcon {
+        transform: translateY(20%) rotate(180deg);
+      }
+
+      .navLinks {
+        display: block;
+
+        .list {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+    }
+
+    .wrdBrowse {
+      font-size: 0.6rem;
+    }
+
+    .browseIcon {
+      font-size: 1.1rem;
+      font-weight: 100;
+      transform: translateY(-10%);
+      margin-left: 0.5rem;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .navLinks {
+      @include absolute;
+      top: 220px;
+      left: -4.3rem;
+      width: 13rem;
+      height: 30rem;
+      padding-top: 70px;
+      transition: all 0.3s ease-in-out 0.1s;
+      z-index: -2;
+      display: none;
+      border-radius: 7px;
+
+      .list {
+        height: 80%;
+        padding: 1.2rem 0 1rem 0;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.913);
+        border-radius: 7px;
+        border: 1px solid #444;
+        transition: all 0.2s ease-in-out;
+        opacity: 0;
+        transform-origin: top;
+        transform: scale(1, 0);
+
+        li {
+          width: 100%;
+          list-style: none;
+          padding: 1.2rem 0;
+          font-weight: 100;
+          font-size: 0.95rem;
+
+          &:hover {
+            background: rgba(58, 58, 58, 0.31);
+          }
+        }
+      }
+    }
+  }
+
+  .searchBox {
+    @include absolute;
+    justify-content: center;
+    align-items: center;
+    transform: translate(-50%, -50%) scale(0, 1);
+    display: flex;
+    visibility: hidden;
+    left: 50%;
+    width: 40%;
+    height: 40%;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 2px;
+    border: 1px solid rgba(238, 238, 238, 0.735);
+    transition: all 0.2s ease-in-out;
+
+    &.searchClick {
+      transform: translate(-50%, -50%) scale(1, 1);
+      visibility: visible;
+    }
+
+    input {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: none;
+      color: #ccc;
+      font-size: 0.8rem;
+      padding-left: 1.5rem;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .searchIcon,
+  .bell,
+  .avatar {
+    cursor: pointer;
+  }
+
+  .searchIcon {
+    @include absolute;
+    color: #eee;
+    font-size: 0.7rem;
+    right: calc(4% + 90px);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9));
+  }
+
+  .bell {
+    @extend .searchIcon;
+    right: calc(4% + 53px);
+    font-size: 0.8rem;
+    z-index: 1;
+    text-align: center;
+    // border: 1px solid red;
+
+    &.show {
+      // width: 5rem;
+      text-align: right;
+
+      .redCir {
+        opacity: 0;
+      }
+
+      .notificationList {
+        display: grid;
+      }
+    }
+
+    .redCir {
+      @include absolute;
+      border-radius: 50%;
+      height: 10px;
+      width: 10px;
+      background: rgba(255, 0, 0, 0.721);
+      font-size: 0.2rem;
+      text-align: center;
+      left: 54%;
+      top: 3px;
+    }
+
+    .notificationList {
+      @include absolute;
+      top: 14rem;
+      display: none;
+      grid-row: 0.5rem;
+      left: -10rem;
+      width: 15rem;
+      height: 24rem;
+      padding: 0.3rem;
+      transition: all 0.3s ease-in-out 0.1s;
+      z-index: -2;
+      border-radius: 7px;
+      border: 1px solid #444;
+      background: rgba(0, 0, 0, 0.7);
+      text-align: left;
+      overflow-y: scroll;
+
+      .listItem {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        border-bottom: 1px solid rgba(170, 170, 170, 0.694);
+
+        &:nth-last-child(1) {
+          border: none;
+        }
+
+        .listImg {
+          object-fit: center;
+          width: 23%;
+          margin-right: 0.4rem;
+        }
+      }
+    }
+  }
+
+  .avatar {
+    @include absolute;
+    right: 4%;
+    width: 32px;
+    border-radius: 4px;
+  }
+}
